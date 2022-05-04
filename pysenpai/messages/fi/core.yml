@@ -1,0 +1,262 @@
+function:
+  AdditionalInfo: |-
+    Tarkistin antoi myös seuraavat lisätiedot:
+  AdditionalTests: |-
+    Suoritetaan lisätestejä, jotka saattavat kertoa mistä virhe johtuu...
+  AttributeError: |-
+    Oikean nimistä funktiota ei löytynyt, tai sitä kutsuttaessa tapahtui jokin muu AttributeError.
+    Lisätietoja:\n{emsg}
+  CorrectMessage: |-
+    Funktion tulosteet olivat oikein.
+  CorrectResult: |-
+    Funktio palautti oikean tuloksen.
+  EOFError: |- 
+    Funktio pyysi enemmän syötteitä kuin testausohjelma antoi. Tämä voi johtua väärin käsitellystä funktion lopetusehdosta.
+    Lisätietoja:
+    {emsg}
+  FunctionName: |-
+    Testataan {name}-funktiota...
+  GenericErrorMsg: |- 
+    Funktiota kutsuttaessa tapahtui poikkeus.
+    Lisätietoja:
+    {ename}: {emsg}.
+    Testaa funktiota omalla koneellasi saadaksesi lisätietoja.
+  IncorrectMessage: |-
+    Funktion tuloste oli virheellinen.
+  IncorrectResult: |- 
+    Funktio palautti väärän tuloksen.
+  IsNotFunction: |- 
+    Objekti nimeltä {name} löytyi, mutta se ei ollut funktio.
+    Varmista, että olet käyttänyt oikeaa funktion nimeä, ja että funktion päälle ei pääohjelmassa kirjoiteta jotain muuta samalla nimellä.
+  MessageInfo: ""
+  OutputParseError: |- 
+    Funktion tulosteesta ei löytynyt kaikkia arvoja.
+    Varmista että käytät tehtävänannossa määriteltyä muotoilua tulosteille.
+    Epäonnistumisen syy: {reason}
+  OutputPatternInfo: ""
+  PrintExcLine: |-
+    Aiheutui rivistä {lineno}:
+    {{{{{{{line}}}}}}}
+  PrintInputVector: |- 
+    Kokeiltiin syötteillä:
+    {inputs}
+  PrintReference: |- 
+    Olisi pitänyt palauttaa: {ref}
+  PrintStudentOutput: |-
+    Funktiosi koko tuloste:
+    {output}
+  PrintStudentResult: |-
+    Funktio palautti: {res}
+  PrintTestVector: |-
+    Käytetty funktiokutsu:
+    {call}
+  RepeatingResult: |- 
+    Funktio tuotti kahdesti peräkkäin saman tuloksen. Tämä yleensä tarkoittaa, että funktio ei reagoi odotetulla tavalla sille annettuihin argumentteihin tai syötteisiin.
+    Tämä pätee erityisesti jos tämä viesti toistuu.
+  SystemExit: |- 
+    Koodin suoritus on lopetettu väärin käyttämällä jotain seuraavista:
+    quit(), exit(), sys.exit(), raise SystemExit
+    Toteuta ohjelma siten, että näille tai vastaaville keinoille ei ole tarvetta!"
+  TypeError: | 
+    Funktiolle on määritelty väärä määrä parametreja, tai sitä kutsuttaessa tapahtui jokin muu TypeError.
+    Tarkista tehtävänannosta millaset parametrit funktiolla tulisi olla
+    Lisätietoja:
+    {emsg}
+import:
+  BadModuleName: |- 
+    Tiedoston nimessä oli merkkejä joiden takia tarkistin ei pysty sitä avaamaan. Käytä vain englanninkielisiä aakkosia, numeroita ja alaviivaa nimessä."
+  DisallowedOutput: |- 
+    Pääohjelmasi tuotti tulosteita, vaikka sen ei pitäisi. Muista varmistaa, että ohjelmasi ei suorita ylimääräisiä koodiriviejä kun se importataan. Ohjelma tulosti seuraavaa:
+    {output}
+  EOFError: |- 
+    Ohjelman suorituksessa tapahtui EOFError. Todennäköisin syy on input-funktion kutsuminen liian monta kertaa.
+    Lisätietoja:
+    {emsg}
+  GenericErrorMsg: |-
+    Ohjelmaa ladattaessa tapahtui poikkeus.
+    {ename}: {emsg}
+  ImportError: |- 
+    Ohjelmaa ei löytynyt tai sen lataamisessa tapahtui ImportError.
+    Lisätietoja:
+    {emsg}
+  IndentationError: |- 
+    Koodi sisälsi sisennysvirheitä. Älä käytä tarkistusta Python-tulkkina!
+    Korjaa koodisi virheet omalla koneella suorittamalla, jolloin saat tarkkaa tietoa missä ja millaisia virheet ovat.
+    Palauta koodisi vasta kun saat sen komentorivillä toimimaan alusta loppuun!
+  LoadingModule: |-
+    Ladataan moduuli {name} arvioitavaksi...
+  MissingFileExtension: |- 
+    Tiedostosta puuttuu .py-pääte, joka tulisi olla kaikissa Python-tiedostoissa.
+  PrintExcLine: |- 
+    Aiheutui rivistä {lineno}:
+    {{{{{{{line}}}}}}}
+  PrintInputVector: |- 
+    Käytettiin syötteitä:
+    {inputs}
+  PrintStudentOutput: |-
+    Ohjelmasi tuloste ladatessa:
+    {output}
+  SyntaxError: |- 
+    Koodi sisälsi syntaksivirheitä. Älä käytä tarkistusta Python-tulkkina!
+    Korjaa koodisi virheet omalla koneella suorittamalla, jolloin saat tarkkaa tietoa missä ja millaisia virheet ovat.
+    Palauta koodisi vasta kun saat sen komentorivillä toimimaan alusta loppuun!
+  SystemExit: |- 
+    Koodin suoritus on lopetettu väärin käyttämällä jotain seuraavista:
+    quit(), exit(), sys.exit(), raise SystemExit
+    Toteuta ohjelma siten, että näille tai vastaaville keinoille ei ole tarvetta!
+  SystemModuleName: |- 
+    Palautetun moduulin nimi {name} on sama kuin järjestelmämoduulin. Vaihda tiedoston nimi.
+lint:
+  GenericErrorMsg: |- 
+    Testaus epäonnistui.
+    Lisätietoja:
+    {ename}: {emsg}.
+  LintConvention: |- 
+    Käytäntöjä rikkovaa koodia tiedostossa {lintmsg.module}, rivillä {lintmsg.line}. Selitys:
+    {lintmsg.msg} ({lintmsg.symbol})
+  LintError: |- 
+    Todennäköinen ongelmien aiheuttajat tiedostossa {lintmsg.module}, rivillä {lintmsg.line}. Selitys:
+    {lintmsg.msg} ({lintmsg.symbol})
+  LintFailMessage: |- 
+    Koodisi ei läpäissyt laatutarkistusta.
+  LintFatal: |-
+    Tarkistuksen keskeyttänyt ongelma tiedostossa {lintmsg.module}, rivillä {lintmsg.line}. Selitys:
+    {lintmsg.msg} ({lintmsg.symbol})
+  LintMessage: |- 
+    Tarkistin ilmoitti rivistä {lintmsg.line}. Selitys:
+    {lintmsg.msg}
+  LintMessagesBegin: |-
+    Koodista löytyneet ongelmat on listattu alla.
+  LintRefactor: |-
+    Huonolaatuista koodia tiedostossa {lintmsg.module}, rivillä {lintmsg.line}. Selitys:
+    {lintmsg.msg} ({lintmsg.symbol})
+  LintSuccess: |- 
+    Koodisi läpäisi laatutarkistuksen pisteillä {global_note:.1f} / 10.0.
+  LintTest: |-
+    Tarkistetaan koodin laatua...
+  LintWarning: |- 
+    Mahdollinen ongelmien aiheuttaja tiedostossa {lintmsg.module}, rivillä {lintmsg.line}. Selitys:
+    {lintmsg.msg} ({lintmsg.symbol})
+  pylint_fail_low_score: |-
+    Koodisi sai liian pienet laatupisteet ({global_note:.1f} / 10.0).
+    Tavoite: 5+ / 10.0.
+program:
+  AdditionalInfo: |- 
+    Tarkistin antoi myös seuraavat lisätiedot:
+  AdditionalTests: |- 
+    Suoritetaan lisätestejä, jotka saattavat kertoa mistä virhe johtuu...
+  CorrectMessage: |-
+    Ohjelman tulosteet olivat oikein.
+  CorrectResult: |-
+    Ohjelma toimi oikein.
+  EOFError: |- 
+    Ohjelma pyysi enemmän syötteitä kuin testausohjelma antoi. Tämä voi johtua väärin käsitellystä ohjelman lopetusehdosta. Lisätietoja:
+    {emsg}
+  GenericErrorMsg: |- 
+    Ohjelmaa suorittaessa tapahtui poikkeus.
+    Lisätietoja:
+    {ename}: {emsg}
+    Testaa ohjelmaa omalla koneellasi saadaksesi lisätietoja.
+  IncorrectMessage: |-
+    Ohjelman tuloste oli virheellinen.
+  IncorrectResult: |- 
+    Ohjelman tuloste sisälsi virheellisiä arvoja.
+  IndexError: |- 
+    Ohjelmaa suorittaessa tapahtui IndexError. Tämä voi johtua siitä, että ohjelma ei käsittele oikein moniosaisia syötteitä, joista puuttuu osia, tai joissa on väärä erotin.
+    Lisätietoja:
+    {emsg}
+  MessageInfo: ""
+  OutputParseError: |-
+    Ohjelman tulosteesta ei löytynyt kaikkia arvoja.
+    Varmista että käytät tehtävänannossa määriteltyä muotoilua tulosteille.
+    Epäonnistumisen syy: {reason}
+  OutputPatternInfo: ""
+  PrintExcLine: |-
+    Aiheutui rivistä {lineno}:
+    {{{{{{{line}}}}}}}
+  PrintInputVector: |- 
+    Käytettiin syötteitä:
+    {inputs}
+  PrintReference: |- 
+    Arvot joiden olisi pitänyt löytyä:\n{ref}
+  PrintStudentOutput: |-
+    Ohjelmasi koko tuloste:
+    {output}
+  PrintStudentResult: |-
+    Ohjelman tulosteesta löytyneet arvot:
+    {parsed}
+  ProgramName: |-
+    Testataan ohjelmaa...
+  RepeatingResult: |- 
+    Ohjelma tuotti kahdesti peräkkäin saman tuloksen. Tämä yleensä tarkoittaa, että ohjelma ei reagoi odotetulla tavalla sille annettuihin syötteisiin.
+    Tämä pätee erityisesti jos tämä viesti toistuu.
+  SystemExit: |- 
+    Koodin suoritus on lopetettu väärin käyttämällä jotain seuraavista:
+    quit(), exit(), sys.exit(), raise SystemExit
+    Toteuta ohjelma siten, että näille tai vastaaville keinoille ei ole tarvetta!
+  TypeError: |- 
+    Ohjelmaa suorittaessa tapahtui TypeError. Tämä voi johtua siitä, että syötteitä ei muuteta ennen käyttöä (syötteet ovat aina merkkijonoja).
+    Lisätietoja:
+    {emsg}
+  ValueError: |- 
+    Ohjelmaa suorittaessa tapahtui ValueError. Tämä voi johtua siitä, että virheellisiä syötteitä ei ole käsitelty oikein.Lisätietoja:
+    {emsg}
+snippet:
+  AdditionalInfo: |-
+    Tarkistin antoi myös seuraavat lisätiedot:
+  AdditionalTests: |- 
+    Suoritetaan lisätestejä, jotka saattavat kertoa mistä virhe johtuu...
+  CorrectMessage: |-
+    Koodin tulosteet olivat oikein.
+  CorrectResult: |-
+    Koodi toimi oikein.
+  GenericErrorMsg: |- 
+    Koodia suorittaessa tapahtui poikkeus.
+    Lisätietoja:
+    {ename}: {emsg}
+    Testaa koodia omalla koneellasi ohjeita seuraten saadaksesi lisätietoja.
+  IncorrectMessage: |-
+    Koodin tuloste oli virheellinen.
+  IncorrectResult: |- 
+    Koodi toimi väärin.
+  MessageInfo: ""
+  OutputParseError: |- 
+    Koodin tulosteesta ei löytynyt kaikkia arvoja.
+    Varmista että käytät tehtävänannossa määriteltyä muotoilua tulosteille.
+    Epäonnistumisen syy: {reason}
+  OutputPatternInfo: ""
+  PrintConstructedCode: |-
+    Vastauksesi sijoitettuna kokonaiseen ohjelmaan:
+    {code}
+  PrintInputVector: |- 
+    Käytettiin syötteitä:
+    {inputs}
+  PrintReference: |-
+    Odotetut muuttujien arvot:
+    {ref}
+  PrintStudentOutput: |-
+    Koodin tuloste:
+    {output}
+  PrintStudentResult: |- 
+    Muuttujien arvot suorituksen jälkeen:\n{res}
+  SnippetTest: |- 
+    Testataan koodipätkää...
+  fail_missing_variable: |-
+    Koodissa ei luotu pyydettyä muuttujaa.
+  fail_variable_value: |- 
+    Koodi sijoitti muuttujaan väärän arvon.
+static:
+  AttributeError: |- 
+    {fname}-nimistä funktiota ei löytynyt kooditiedostosta.
+  CorrectResult: |- 
+    Koodista ei löytynyt ongelmia.
+  GenericErrorMsg: |- 
+    Jokin meni pieleen lähdekoodia luettaessa.
+    Lisätietoja:
+    {ename}: {emsg}
+  OSError: |- 
+    Lähdekoodin lukeminen epäonnistui.
+  StaticTest: |- 
+    Tarkistetaan noudattaako koodi tehtävänannon rajoituksia...
+  StaticTestInfo: |- 
+    Etsitään koodista mahdollisia ongelmia...

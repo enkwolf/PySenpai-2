@@ -1,0 +1,267 @@
+function:
+  AdditionalInfo: |-
+    The checker gave the following as additional information:
+  AdditionalTests: |-
+    Performing additional tests that may suggest cause for the error...
+  AttributeError: |-
+    The function was not found, or another kind of AttributeError occurred while calling the function.
+    Additional information:
+    {emsg}
+  CorrectMessage: |-
+    The function's output was correct.
+  CorrectResult: |-
+    The function returned the correct value(s)
+  EOFError: |-
+    An EOFError occurred while calling the function. The most likely cause is calling input too many times.
+    Additional information:
+    {emsg}
+  FunctionName: |-
+    Testing function {name}...
+  GenericErrorMsg: |-
+    An error occurred while calling the function.
+    Additional information:
+    {ename}: {emsg}
+    Test the function on your computer to get more information.
+  IncorrectMessage: |-
+    The function's output was incorrect.
+  IncorrectResult: |-
+    The function returned incorrect value(s)
+  IsNotFunction: |-
+    An object called {name} was found, but it was not a function.
+    Take care to not overwrite the function with another value in your main program!
+  MessageInfo: ""
+  OutputParseError: |-
+    Parsing the function's output for result values was not successful.
+    Check that your function uses the specified formatting when printing.
+    Reason provided by the checker:{reason}
+  OutputPatternInfo: ""
+  PrintExcLine: |-
+    Caused by line {lineno}:
+    {{{{{{{line}}}}}}}
+  PrintInputVector: |-
+    Using inputs:
+    {inputs}
+  PrintReference: |-
+    Expected result: {ref}
+  PrintStudentOutput: |-
+    Your function's output:
+    {output}
+  PrintStudentResult: |-
+    Your function returned: {res}
+  PrintTestVector: |-
+    Function call used:
+    {call}
+  RepeatingResult: |-
+    The function produced the same result twice in succession. This usually means the function is not reacting properly to arguments or inputs.
+    This is especially likely if this message pops up repeatedly.
+  SystemExit: |-
+    The program was terminated through the use of:
+    quit(), exit(), sys.exit(), raise SystemExit (etc.)
+    Your program needs to be implemented such a way that it doesn't need any of these.
+  TypeError: |-
+    The function expects an incorrect number of arguments. Alternatively another kind of TypeError occurred while calling the function.
+    Additional information:
+    {emsg}
+import:
+  BadModuleName: |-
+    The filename contained unsupported characters.
+    Only letters of the English alphabet, numbers and underscore are allowed.
+  DisallowedOutput: |-
+    Your main program produced output, even though it's been specifically unallowed for this assignment. Please make sure your program doesn't execute extra code when being imported. Here is your program's output:
+    {output}
+  EOFError: |-
+    An EOFError occurred while importing the module. The most likely cause is calling input too many times.
+    Additional information:
+    {emsg}
+  GenericErrorMsg: |-
+    An error occurred while importing the module.
+    {ename}: {emsg}
+  ImportError: |-
+    The code file was not found or imports inside it caused an ImportError.
+    Additional information:
+    {emsg}
+  IndentationError: |-
+    Your code included indentation errors. Do not use the checking program as a Python interpreter!
+    You should find all the errors in your code by running it in a shell as it provides more accurate information of what went wrong.
+    Submit your code for testing only after it runs on your computer!
+  LoadingModule: |-
+    Loading module {name} for evaluation...
+  MissingFileExtension: |-
+    The file is missing the .py extension, which is required of Python code files.
+  NameError: |- 
+    The program has an execution path where it tries to access an undefined variable.
+    Additional information:
+    {emsg}"
+  PrintExcLine: |-
+    Caused by line {lineno}:
+    {{{{{{{line}}}}}}}
+  PrintInputVector: |-
+    While using inputs:
+    {inputs}
+  PrintStudentOutput: |-
+    Your program's output while loading:
+    {output}
+  SyntaxError: |-
+    Your code included syntax errors. Do not use the checking program as a Python interpreter!
+    You should find all the errors in your code by running it in a shell as it provides more accurate information of what went wrong.
+    Submit your code for testing only after it runs on your computer!
+  SystemExit: |-
+    The program was terminated through the use of:
+    quit(), exit(), sys.exit(), raise SystemExit (etc.)
+    Your program needs to be implemented such a way that it doesn't need any of these.
+  SystemModuleName: |-
+    The filename {name} collides with a system module. Rename your file.
+lint:
+  GenericErrorMsg: |-
+    Running the test failed.
+    Additional information:
+    {ename}: {emsg}.
+  LintConvention: |-
+    Convention violation at {lintmsg.module}, line {lintmsg.line}. Explanation:
+    {lintmsg.msg} ({lintmsg.symbol})
+  LintError: |-
+    Probable problem at {lintmsg.module}, line {lintmsg.line}. Explanation:
+    {lintmsg.msg} ({lintmsg.symbol})
+  LintFailMessage: |-
+    Your code didn't pass the quality test.
+  LintFatal: |-
+    Unable to continue after {lintmsg.module}, line {lintmsg.line}. Explanation:
+    {lintmsg.msg} ({lintmsg.symbol})
+  LintMessage: |-
+    The checker notified about line {lintmsg.line}. Explanation:
+    {lintmsg.msg} ({lintmsg.symbol})
+  LintMessagesBegin: |-
+    Problems found in the code are listed below.
+  LintRefactor: |-
+    Bad code at {lintmsg.module}, line {lintmsg.line}. Explanation:
+    {lintmsg.msg}
+  LintSuccess: |-
+    Your code passed the quality check with score {global_note:.1f} / 10.0.
+  LintTest: |-
+    Testing code quality...
+  LintWarning: |-
+    Potential problem at {lintmsg.module}, line {lintmsg.line}. Explanation:
+    {lintmsg.msg} ({lintmsg.symbol})
+  pylint_fail_low_score: |-
+    Your code received too low quality score ({global_note:.1f} / 10.0).
+    Target: 5+ / 10.0.
+program:
+  AdditionalInfo: |-
+    The checker gave the following as additional information:
+  AdditionalTests: |-
+    Performing additional tests that may suggest cause for the error...
+  CorrectMessage: |-
+    The program's output was correct.
+  CorrectResult: |-
+    The program performed correctly.
+  EOFError: |-
+    The program prompted for more inputs than were provided by the tester. This is likely caused by faulty end condition handling.
+    Additional information:
+    {emsg}
+  GenericErrorMsg: |-
+    An error occurred while running the program.
+    Additional information:
+    {ename}: {emsg}
+    Test the program on your computer to get more information.
+  IncorrectMessage: |-
+    The program's output was incorrect.
+  IncorrectResult: |-
+    The program's output contained incorrect results.
+  IndexError: |-
+    An IndexError occurred while running the program. This can be caused by improper handling of split inputs, i.e. failing to check that the input contained enough parameters using the correct separator.
+    Additional information:
+    {emsg}
+  MessageInfo: ""
+  OutputParseError: |-
+    Parsing the program's output for result values was not successful.
+    Check that your program uses the specified formatting when printing.
+    Reason provided by the checker:{reason}
+  OutputPatternInfo: ""
+  PrintExcLine: |-
+    Caused by line {lineno}:
+    {{{{{{{line}}}}}}}
+  PrintInputVector: |-
+    Using inputs:
+    {inputs}
+  PrintReference: |-
+    Expected to find these values:
+    {ref}
+  PrintStudentOutput: |-
+    Your program's output:
+    {output}
+  PrintStudentResult: |-
+    The following values were parsed from your program's output:
+    {parsed}
+  ProgramName: |-
+    Testing program...
+  RepeatingResult: |-
+    The program produced the same result twice in succession. This usually means the program is not reacting properly to inputs.
+    This is especially likely if this message pops up repeatedly.
+  SystemExit: |-
+    The program was terminated through the use of:
+    quit(), exit(), sys.exit(), raise SystemExit (etc.)
+    Your program needs to be implemented such a way that it doesn't need any of these.
+  TypeError: |-
+    A TypeError occurred while running the program. This can be the result of not converting user inputs into proper types (inputs are always strings).
+    Additional information:
+    {emsg}
+  ValueError: |-
+    A ValueError occurred while running the program. This is likely caused by faulty handling of erroneous inputs.
+    Additional information:
+    {emsg}
+snippet:
+  AdditionalInfo: |-
+    The checker gave the following as additional information:
+  AdditionalTests: |-
+    Performing additional tests that may suggest cause for the error...
+  CorrectMessage: |-
+    The code's output was correct.
+  CorrectResult: |-
+    The code performed correctly.
+  GenericErrorMsg: |-
+    An error occurred while running the program.
+    Additional information:
+    {ename}: {emsg}
+    Test the code on your computer to get more information.
+  IncorrectMessage: |-
+    The code's output was incorrect.
+  IncorrectResult: |-
+    The code performed incorrectly.
+  MessageInfo: ""
+  OutputParseError: |-
+    Parsing the program's output for result values was not successful.
+    Check that your program uses the specified formatting when printing.
+    Reason provided by the checker: {reason}
+  OutputPatternInfo: ""
+  PrintConstructedCode: |-
+    Your answer inserted into a complete program:
+    {code}
+  PrintInputVector: |-
+    While using inputs:
+    {inputs}
+  PrintReference: |-
+    Expected variables:
+    {ref}
+  PrintStudentOutput: |-
+    Code output:
+    {output}
+  PrintStudentResult: |-
+    Variables after execution:
+    {res}
+  SnippetTest: |-
+    Testing code snippet...
+static:
+  AttributeError: |-
+    A function called {fname} was not found from your code file.
+  CorrectResult: |-
+    No problems were found in the source code.
+  GenericErrorMsg: |-
+    Something went wrong while reading the source code.
+    Addional information:
+    {ename}: {emsg}
+  OSError: |-
+    Failed to read the source code.
+  StaticTest: |-
+    Checking the source code for violations of restrictions set by the assignment...
+  StaticTestInfo: |-
+    Looking for potential problems in the source code...
