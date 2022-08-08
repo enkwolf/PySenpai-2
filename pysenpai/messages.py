@@ -63,7 +63,7 @@ class TranslationDict(dict):
         except KeyError:
             if default:
                 return self.__getitem__("{}:{}".format(default, lang))
-        raise KeyError
+        raise KeyError(key)
                 
     def get_many(self, lang, *keys):
         """

@@ -16,6 +16,11 @@ class JsonOutput(dict):
         super().__init__(self)
         self.__setitem__("tester", "")
         self.__setitem__("tests", [])
+        self.__setitem__("result", {
+            "correct": False,
+            "score": 0,
+            "max": 0
+        })
         
     def set_tester(self, name):
         """
@@ -25,6 +30,9 @@ class JsonOutput(dict):
         """
         
         self.__setitem__("tester", name)
+        
+    def set_max_score(self, value):
+        self.__getitem__("result")["max"] = value
         
     def new_test(self, title):
         """
@@ -65,6 +73,11 @@ class JsonOutput(dict):
             "hints": hints
         })
         
+    def update_result(self, correct, score):
+        result = self.__getitem__("result")
+        result["correct"] = correct
+        result["score"] = score
+        
     def grind_params(self, template, var_names, values, question):
         """
         Adds grind parameters to the output. These are used only when the checker
@@ -79,7 +92,7 @@ class JsonOutput(dict):
                 "question": question
             }
         )
-            
+
     def wrap_to(self, wrapper_dict, keyname):
         """
         Puts the evaluation dictionary inside another dictionary, using the

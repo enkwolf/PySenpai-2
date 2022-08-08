@@ -14,7 +14,7 @@ function:
     Funktio pyysi enemmän syötteitä kuin testausohjelma antoi. Tämä voi johtua väärin käsitellystä funktion lopetusehdosta.
     Lisätietoja:
     {emsg}
-  FunctionName: |-
+  TargetName: |-
     Testataan {name}-funktiota...
   GenericErrorMsg: |- 
     Funktiota kutsuttaessa tapahtui poikkeus.
@@ -131,15 +131,15 @@ lint:
     Huonolaatuista koodia tiedostossa {lintmsg.module}, rivillä {lintmsg.line}. Selitys:
     {lintmsg.msg} ({lintmsg.symbol})
   LintSuccess: |- 
-    Koodisi läpäisi laatutarkistuksen pisteillä {global_note:.1f} / 10.0.
+    Koodisi läpäisi laatutarkistuksen pisteillä {stats.global_note:.1f} / 10.0.
   LintTest: |-
     Tarkistetaan koodin laatua...
   LintWarning: |- 
     Mahdollinen ongelmien aiheuttaja tiedostossa {lintmsg.module}, rivillä {lintmsg.line}. Selitys:
     {lintmsg.msg} ({lintmsg.symbol})
   pylint_fail_low_score: |-
-    Koodisi sai liian pienet laatupisteet ({global_note:.1f} / 10.0).
-    Tavoite: 5+ / 10.0.
+    Koodisi sai liian pienet laatupisteet ({stats.global_note:.1f} / 10.0).
+    Tavoite: 9+ / 10.0.
 program:
   AdditionalInfo: |- 
     Tarkistin antoi myös seuraavat lisätiedot:
@@ -178,14 +178,15 @@ program:
     Käytettiin syötteitä:
     {inputs}
   PrintReference: |- 
-    Arvot joiden olisi pitänyt löytyä:\n{ref}
+    Arvot joiden olisi pitänyt löytyä:
+    {ref}
   PrintStudentOutput: |-
     Ohjelmasi koko tuloste:
     {output}
   PrintStudentResult: |-
     Ohjelman tulosteesta löytyneet arvot:
     {parsed}
-  ProgramName: |-
+  TargetName: |-
     Testataan ohjelmaa...
   RepeatingResult: |- 
     Ohjelma tuotti kahdesti peräkkäin saman tuloksen. Tämä yleensä tarkoittaa, että ohjelma ei reagoi odotetulla tavalla sille annettuihin syötteisiin.
@@ -239,7 +240,7 @@ snippet:
     {output}
   PrintStudentResult: |- 
     Muuttujien arvot suorituksen jälkeen:\n{res}
-  SnippetTest: |- 
+  TargetName: |- 
     Testataan koodipätkää...
   fail_missing_variable: |-
     Koodissa ei luotu pyydettyä muuttujaa.

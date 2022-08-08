@@ -18,9 +18,15 @@ def print_log(log):
         print(test["title"])
         for i, run in enumerate(test["runs"], start=1):
             print()
-            print("---- run {} ----".format(i))
+            print(f"---- run {i} ----")
             for output in run["output"]:
                 print(output["msg"])
+    
+    print()
+    print("-- EVALUATION --")
+    print()
+    print("Accepted:", log["result"]["correct"])
+    print("Score:", log["result"]["score"], "/", log["result"]["max"])
                 
 def main():
     log = read_lines()

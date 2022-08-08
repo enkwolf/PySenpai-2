@@ -12,13 +12,13 @@ from pysenpai.messages import load_messages, Codes
 from pysenpai.output import output
 from pysenpai.utils.internal import FNAME_PAT, CommaSplitAction, StringOutput, get_exception_line
 
-# expose checker interface through this module
+# expose basic checking interface through this module
 from pysenpai.messages import TranslationDict
-from pysenpai.testing.program import test_program
-from pysenpai.testing.snippet import test_code_snippet
-from pysenpai.testing.function import test_function
-from pysenpai.testing.static import static_test
-from pysenpai.testing.lint import pylint_test
+from pysenpai.checking.program import test_program
+from pysenpai.checking.snippet import test_code_snippet
+from pysenpai.checking.function import test_function, FunctionTestCase
+from pysenpai.checking.static import static_test
+from pysenpai.checking.lint import pylint_test
 
 
 def end():
@@ -34,13 +34,18 @@ def end():
     
 atexit.register(end)
 
-def set_tester(name):
+def init_test(name, max_score):
     """
     Sets the tester name. Call this is in the checker if you need the checker's
     file name included in the output JSON document.
     """
     
     json_output.set_tester(name)
+    json_output.set_max_score(max_score)
+
+def set_result(correct, score):
+    json_output.update_result(correct, score)
+
 
 def parse_command():
     """

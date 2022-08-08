@@ -40,3 +40,10 @@ class NoMatchingObject(Exception):
     """
     
     pass
+
+class NotCallable(Exception):
+    
+    def __init__(self, name):
+        super().__init__(self)
+        self.callable_name = name
+        

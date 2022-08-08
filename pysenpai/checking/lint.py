@@ -14,7 +14,7 @@ from pysenpai.utils.internal import StringOutput, get_exception_line
 def pylint_test(st_module,
                 lang="en",
                 extra_options=[],
-                validator=defaults.default_pylint_validator,
+                grader=defaults.default_pylint_grader,
                 info_only=True,
                 custom_msgs={}):
     
@@ -66,15 +66,16 @@ def pylint_test(st_module,
     sys.stderr = save_e
             
     try:
-        validator(result.linter.stats)
+        score = grader(result.linter.stats)
     except AssertionError as e:
+        score = 0
         if info_only:
-            output(msgs.get_msg(e, lang, "LintFailMessage"), Codes.INFO, **result.linter.stats)
+            output(msgs.get_msg(e, lang, "LintFailMessage"), Codes.INFO, stats=result.linter.stats)
         else:
-            output(msgs.get_msg(e, lang, "LintFailMessage"), Codes.INCORRECT, **result.linter.stats)
+            output(msgs.get_msg(e, lang, "LintFailMessage"), Codes.INCORRECT, stats=result.linter.stats)
             passed = False
     else:
-        output(msgs.get_msg("LintSuccess", lang), Codes.CORRECT, global_note=result.linter.stats.global_note)
+        output(msgs.get_msg("LintSuccess", lang), Codes.CORRECT, stats=result.linter.stats)
         
     output(msgs.get_msg("LintMessagesBegin", lang), Codes.INFO)
     
@@ -90,4 +91,4 @@ def pylint_test(st_module,
         elif msg.category == "fatal":
             output(msgs.get_msg("LintFatal", lang), Codes.ERROR, lintmsg=msg)
 
-    return 
+    return score

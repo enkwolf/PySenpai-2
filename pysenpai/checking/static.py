@@ -10,7 +10,10 @@ from pysenpai.utils.internal import StringOutput, get_exception_line
 
 # NOTE: custom_msgs is read only
 # therefore setting defaults to empty dictionary is safe here. 
-def static_test(st_module, func_names, lang, validators, info_only=False, custom_msgs={}):
+def static_test(st_module, func_names, lang, validators,
+                info_only=False,
+                custom_msgs={},
+                grader=defaults.static_pass_fail_grader):
     """
     static_test(st_module, func_names, lang, validators[, info_only=False[, custom_msgs={}]])
     
@@ -70,3 +73,5 @@ def static_test(st_module, func_names, lang, validators, info_only=False, custom
     
     if not failed:
         output(msgs.get_msg("CorrectResult", lang), Codes.CORRECT)
+        
+    return grader(failed)

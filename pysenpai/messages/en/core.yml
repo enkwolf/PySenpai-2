@@ -17,6 +17,8 @@ function:
     {emsg}
   FunctionName: |-
     Testing function {name}...
+  TargetName: |-
+    Testing function {name}...    
   GenericErrorMsg: |-
     An error occurred while calling the function.
     Additional information:
@@ -136,14 +138,14 @@ lint:
     Bad code at {lintmsg.module}, line {lintmsg.line}. Explanation:
     {lintmsg.msg}
   LintSuccess: |-
-    Your code passed the quality check with score {global_note:.1f} / 10.0.
+    Your code passed the quality check with score {stats.global_note:.1f} / 10.0.
   LintTest: |-
     Testing code quality...
   LintWarning: |-
     Potential problem at {lintmsg.module}, line {lintmsg.line}. Explanation:
     {lintmsg.msg} ({lintmsg.symbol})
   pylint_fail_low_score: |-
-    Your code received too low quality score ({global_note:.1f} / 10.0).
+    Your code received too low quality score ({stats.global_note:.1f} / 10.0).
     Target: 5+ / 10.0.
 program:
   AdditionalInfo: |-

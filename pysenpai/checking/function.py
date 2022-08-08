@@ -3,15 +3,30 @@ import io
 import sys
 
 import pysenpai.callbacks.defaults as defaults
+from pysenpai.exceptions import NoAdditionalInfo
 from pysenpai.output import json_output
 from pysenpai.messages import load_messages, Codes
 from pysenpai.output import output
 from pysenpai.utils.internal import StringOutput, get_exception_line
+from pysenpai.checking import TestCase
+
+class FunctionTestCase(TestCase):
+    
+    def __init__(self, args, weight, ref_result, validator=defaults.result_validator, inputs=None, repeats=1):
+        super().__init__(args, weight, ref_result, validator=validator, inputs=inputs)
+        self.repeats = 1
+        self.results = []
+        
+    def wrap(self, callable):
+        for i in range(self.repeats):
+            self.results.append(callable(*self.args))
+        return self.results[-1]
+
 
 
 # NOTE: custom_msgs, inputs, error_refs, custom_tests, info_funcs are read only
 # therefore setting defaults to empty lists / dictionaries is safe here. 
-def test_function(st_module, func_names, test_vector, ref_func,
+def test_function(st_module, func_names, test_cases, ref_func,
                   lang="en",
                   parent_object=None,
                   custom_msgs={},
@@ -32,7 +47,7 @@ def test_function(st_module, func_names, test_vector, ref_func,
                   repeat=1,
                   new_test=defaults.default_new_test): 
     """
-    test_function(st_module, func_names, test_vector, ref_func[, lang="en"][, kwarg1][, ...])
+    test_function(st_module, func_names, test_cases, ref_func[, lang="en"][, kwarg1][, ...])
     
     Tests a student function with a set of test vectors, against a reference 
     function. The behavior of this function can be customized heavily by using 
@@ -42,7 +57,7 @@ def test_function(st_module, func_names, test_vector, ref_func,
     * *st_module* - a module object that contains the function that's being tested
     * *func_names* - a dictionary that has two character language codes as keys and
       corresponding function name in that language as values
-    * *test_vector* - a list of argument vectors or a function that generates the 
+    * *test_cases* - a list of argument vectors or a function that generates the 
       the list. This vector must be sequences within a list, where each sequence 
       is one test case. Each case vector is unpacked when reference and student 
       functions are called.
@@ -52,7 +67,7 @@ def test_function(st_module, func_names, test_vector, ref_func,
     * *custom_msgs* - a TranslationDict object that includes additions/overrides 
       to the default function test messages
     * *inputs* - input vectors to be given to the function; must have as many vectors 
-      as test_vector. Inputs are automatically joined by newlines and made into a 
+      as test_cases. Inputs are automatically joined by newlines and made into a 
       StringIO object that replaces standard input. Necessary when testing functions 
       that accept user input.
     * *hide_output* - a flag to show/hide student function prints in the test 
@@ -182,25 +197,16 @@ def test_function(st_module, func_names, test_vector, ref_func,
     msgs = load_messages(lang, "function")
     msgs.update(custom_msgs)
     
-    # Set specific presenters to use generic presenter if not given
-    if isinstance(presenter, dict):
-        arg_presenter = presenter.get("arg", defaults.default_value_presenter)
-        input_presenter = presenter.get("input", defaults.default_input_presenter)
-        ref_presenter = presenter.get("ref", defaults.default_value_presenter)
-        res_presenter = presenter.get("res", defaults.default_value_presenter)       
-        parsed_presenter = presenter.get("parsed", defaults.default_value_presenter)
-        call_presenter = presenter.get("call", defaults.default_call_presenter)
-    else:        
-        arg_presenter = presenter
-        input_presenter = presenter
-        ref_presenter = presenter
-        res_presenter = presenter
-        parsed_presenter = presenter
-        call_presenter = presenter
+    arg_presenter = presenter.get("arg", defaults.default_value_presenter)
+    input_presenter = presenter.get("input", defaults.default_input_presenter)
+    ref_presenter = presenter.get("ref", defaults.default_value_presenter)
+    res_presenter = presenter.get("res", defaults.default_value_presenter)       
+    parsed_presenter = presenter.get("parsed", defaults.default_value_presenter)
+    call_presenter = presenter.get("call", defaults.default_call_presenter)
     
     # call test and input producing functions 
-    if inspect.isfunction(test_vector):
-        test_vector = test_vector()
+    if inspect.isfunction(test_cases):
+        test_cases = test_cases()
         
     if inspect.isfunction(inputs):
         inputs = inputs()
@@ -215,16 +221,6 @@ def test_function(st_module, func_names, test_vector, ref_func,
     o = StringOutput()
     sys.stdout = o
             
-    # Prepare test cases. Each case is comprised of its vectors and the reference result 
-    tests = []
-    if ref_needs_inputs:
-        test_vector = zip(test_vector, inputs)
-        for v, i in test_vector:
-            tests.append((v, ref_func(argument_cloner(v), i)))
-    else:        
-        for v in test_vector:
-            tests.append((v, ref_func(*argument_cloner(v))))
-    
     prev_res = None
     prev_out = None
     
@@ -232,30 +228,28 @@ def test_function(st_module, func_names, test_vector, ref_func,
     if parent_object is None:
         parent_object = st_module
     
-    for i, test in enumerate(tests):
+    for i, test in enumerate(test_cases):
         json_output.new_run()
 
         # Test preparations
-        args, ref = test
         sys.stdout = o
         o.clear()
 
-        new_test(argument_cloner(args), inputs)
+        new_test(argument_cloner(test.args), test.inputs)
 
         try:
-            inps = inputs[i]
-            sys.stdin = io.StringIO("\n".join([str(x) for x in inps]))            
+            inps = test.inputs[i]
+            sys.stdin = io.StringIO("\n".join([str(x) for x in inps]))
         except IndexError:
             inps = []
 
-        stored_args = argument_cloner(args)
+        stored_args = argument_cloner(test.args)
 
         # Calling the student function
         try:
             st_func = getattr(parent_object, func_names[lang])
             if inspect.isfunction(st_func) or inspect.ismethod(st_func) or inspect.isclass(st_func):
-                for i in range(repeat):
-                    res = st_func(*args)
+                res = test.wrap(st_func)
             else:
                 sys.stdout = save
                 output(msgs.get_msg("IsNotFunction", lang), Codes.ERROR, name=func_names[lang])
@@ -296,7 +290,7 @@ def test_function(st_module, func_names, test_vector, ref_func,
             output(msgs.get_msg("PrintStudentOutput", lang), Codes.INFO, output=o.content)
 
         try:
-            st_out = output_parser(o.content)
+            st_out = test.parse(o.content)
         except OutputParseError as e:
             output(msgs.get_msg("OutputParseError", lang), Codes.INCORRECT,
                 args=arg_presenter(stored_args),
@@ -318,13 +312,9 @@ def test_function(st_module, func_names, test_vector, ref_func,
             output(msgs.get_msg("PrintStudentOutput", lang), Codes.INFO, output=o.content)
             continue
             
-        # The evaluated result must include an object that was changed during the function call
-        if result_object_extractor:
-            res = result_object_extractor(args, res, st_out)
-            
         # Validate results
         try: 
-            validator(ref, res, st_out)
+            test.validate(res, st_out, o.content)
             output(msgs.get_msg("CorrectResult", lang), Codes.CORRECT)
         except AssertionError as e:
             # Result was incorrect
@@ -342,7 +332,7 @@ def test_function(st_module, func_names, test_vector, ref_func,
                 parsed=parsed_presenter(st_out),
                 output=o.content
             )
-            output(msgs.get_msg("PrintReference", lang), Codes.DEBUG, ref=ref_presenter(ref))
+            output(msgs.get_msg("PrintReference", lang), Codes.DEBUG, ref=ref_presenter(test.ref_result))
             values_printed = True
             if error_refs or custom_tests or test_recurrence:
                 output(msgs.get_msg("AdditionalTests", lang), Codes.INFO)
@@ -376,7 +366,7 @@ def test_function(st_module, func_names, test_vector, ref_func,
                 for info_func in info_funcs:
                     try:
                         output(msgs.get_msg(info_func.__name__, lang), Codes.INFO,
-                            func_res=info_func(res, st_out, o.content, ref, stored_args, inps)
+                            func_res=info_func(res, st_out, o.content, test.ref_result, stored_args, inps)
                         )
                     except NoAdditionalInfo:
                         pass

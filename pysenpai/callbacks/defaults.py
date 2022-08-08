@@ -32,6 +32,13 @@ def default_pylint_validator(stats):
     except KeyError:
         raise AssertionError
 
+def default_pylint_grader(stats):
+    try:
+        assert stats.global_note >= 9, "pylint_fail_low_score"
+    except KeyError:
+        raise AssertionError
+    return 1
+
 def default_value_presenter(value) -> str:
     """
     This is the default presenter for student result values, parsed results, reference values
@@ -98,6 +105,12 @@ def default_vars_presenter(module) -> str:
         
     return "{{{highlight=python3\n" + var_vals + "\n}}}"
     
+    
+def pass_fail_grader(test_cases):
+    return int(all(case.correct for case in test_cases))
+    
+def static_pass_fail_grader(failed):
+    return int(not failed)
     
 def default_construct_presenter(code) -> str:
     """

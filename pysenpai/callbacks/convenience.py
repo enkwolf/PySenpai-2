@@ -68,4 +68,8 @@ def raw_presenter(value) -> str:
     
     return repr(value)
     
-
+def output_bonus_grader(test_cases):
+    functional = all(case.correct for case in test_cases)
+    if functional:
+        return 1 + int(all(case.output_correct for case in test_cases))
+    return 0

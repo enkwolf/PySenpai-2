@@ -1,5 +1,28 @@
+import inspect
 import random
+import re
 from pysenpai.exceptions import NoMatchingObject
+
+import_as_pat = re.compile("import (?P<module>[A-Za-z0-9_]+) as (?P<alias>[A-Za-z0-9_ÄäÖö]+)")
+
+class CallLogger(object):
+
+    def __init__(self):
+        self.calls = []
+        self.args = []
+        self.kwargs = []
+
+    def __call__(self, *args, **kwargs):
+        self.args.append(args)
+        self.kwargs.append(kwargs)
+        
+    def __getattr__(self, attr):
+        self.calls.append(attr)
+        return self
+        
+    def __iter__(self):
+        for call, args, kwargs in zip(self.calls, self.args, self.kwargs):
+            yield call, args, kwargs
 
 class SimpleRef(object):
     """
@@ -27,7 +50,7 @@ def find_first(pattern, string, rtype=str):
     except IndexError:
         return None
 
-def find_objects(st_module, object_type, first=True, name_only=False):
+def find_objects(st_module, object_type, first=True, name_only=False, exclude=None):
     """
     find_objects(st_module, object_type[, first=True][, name_only=False]) -> string or list
     
@@ -42,9 +65,10 @@ def find_objects(st_module, object_type, first=True, name_only=False):
     """
     
     matches = []
+    exclude = exclude or []
     
     for name in dir(st_module):
-        if not name.startswith("_"):
+        if not name.startswith("_") and name not in exclude:
             if isinstance(getattr(st_module, name), object_type):
                 if first:
                     if name_only:
@@ -61,6 +85,12 @@ def find_objects(st_module, object_type, first=True, name_only=False):
             return matches
         else:
             raise NoMatchingObject
+
+def replace_module(st_module, module_name, object):
+    for match in import_as_pat.finditer(inspect.getsource(st_module)):
+        if match.group("module") == module_name:
+            module_name = match.group("alias")
+    setattr(st_module, module_name, object)
 
 def determine_question(history, completed, active, target):
     '''
