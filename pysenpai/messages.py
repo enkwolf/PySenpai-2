@@ -119,7 +119,7 @@ class TranslationDict(dict):
 
 def load_messages(lang, category, module="core"):
     msgs = TranslationDict()
-    msg_path = pkg_resources.resource_filename(__name__, "messages")
+    msg_path = pkg_resources.resource_filename(__name__, "msg_data")
     try:
         with open(os.path.join(msg_path, lang, f"{module}.yml"), encoding="utf-8") as msg_file:
             msg_dict = yaml.safe_load(msg_file)
