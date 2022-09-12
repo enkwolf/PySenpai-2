@@ -146,7 +146,7 @@ lint:
     {lintmsg.msg} ({lintmsg.symbol})
   pylint_fail_low_score: |-
     Your code received too low quality score ({stats.global_note:.1f} / 10.0).
-    Target: 5+ / 10.0.
+    Target: 9+ / 10.0.
 program:
   AdditionalInfo: |-
     The checker gave the following as additional information:
