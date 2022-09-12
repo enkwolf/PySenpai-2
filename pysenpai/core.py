@@ -5,7 +5,6 @@ import io
 import json
 import os.path
 import sys
-from stdlib_list import stdlib_list
 import pysenpai.callbacks.defaults as defaults
 from pysenpai.output import json_output
 from pysenpai.messages import load_messages, Codes 
@@ -184,7 +183,7 @@ def load_module(module_path,
         
     pyver = "{}.{}".format(sys.version_info.major, sys.version_info.minor)
         
-    if name in stdlib_list(pyver):
+    if name in sys.stdlib_module_names:
         output(msgs.get_msg("SystemModuleName", lang), Codes.ERROR, name=module_name)
         return None
         

@@ -5,8 +5,9 @@ setup(
     version="2.0.0",
     packages=find_packages(),
     include_package_data=True,
+    package_data={"pysenpai.msg_data": ["*/*.yml"]},
     install_requires=[
-        "stdlib_list",
+        "setuptools-git",
         "pylint",
         "pyyaml"
     ],
