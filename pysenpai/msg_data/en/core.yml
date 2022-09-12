@@ -203,6 +203,8 @@ program:
     The program was terminated through the use of:
     quit(), exit(), sys.exit(), raise SystemExit (etc.)
     Your program needs to be implemented such a way that it doesn't need any of these.
+  TargetName: |-
+    Testing program...
   TypeError: |-
     A TypeError occurred while running the program. This can be the result of not converting user inputs into proper types (inputs are always strings).
     Additional information:
@@ -251,6 +253,8 @@ snippet:
     Variables after execution:
     {res}
   SnippetTest: |-
+    Testing code snippet...
+  TargetName: |-
     Testing code snippet...
 static:
   AttributeError: |-
