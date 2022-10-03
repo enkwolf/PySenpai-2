@@ -185,7 +185,7 @@ def run_test_cases(category, test_target, st_module, test_cases, lang,
             res = test.wrap(st_module, test_target)
         except NotCallable as e:
             sys.stdout = save
-            output(msgs.get_msg("IsNotFunction", lang), ERROR, name=e.callable_name)
+            output(msgs.get_msg("IsNotFunction", lang), Codes.ERROR, name=e.callable_name)
             return
         except Exception as e:
             if validate_exception:
@@ -252,7 +252,7 @@ def run_test_cases(category, test_target, st_module, test_cases, lang,
                 output(msgs.get_msg("CorrectMessage", lang), Codes.CORRECT)
             except AssertionError as e:                
                 output(msgs.get_msg(e, lang, "IncorrectMessage"), Codes.INCORRECT)
-                output(msgs.get_msg("MessageInfo", lang), INFO)
+                output(msgs.get_msg("MessageInfo", lang), Codes.INFO)
                 output(msgs.get_msg("PrintStudentOutput", lang), Codes.INFO, output=o.content)
         
         test.teardown()
