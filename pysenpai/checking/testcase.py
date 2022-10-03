@@ -186,7 +186,7 @@ def run_test_cases(category, test_target, st_module, test_cases, lang,
         except NotCallable as e:
             sys.stdout = save
             output(msgs.get_msg("IsNotFunction", lang), Codes.ERROR, name=e.callable_name)
-            return
+            return 0
         except Exception as e:
             if validate_exception:
                 res = e
