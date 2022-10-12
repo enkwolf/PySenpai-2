@@ -73,3 +73,6 @@ def output_bonus_grader(test_cases):
     if functional:
         return 1 + int(all(case.output_correct for case in test_cases))
     return 0
+
+def output_strict_grader(test_cases):
+    return int(all(case.correct and case.output_correct for case in test_cases))
