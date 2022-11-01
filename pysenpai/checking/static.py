@@ -58,20 +58,22 @@ def static_test(st_module, func_names, lang, validators,
             emsg=emsg,
             ename=ename
         )
-        return 
+        return
         
     failed = 0
+    passed = 0
     for validator in validators:
         try: 
             validator(source, doc, comments)
         except AssertionError as e:
             if info_only:
                 output(msgs.get_msg(e, lang, validator.__name__), Codes.INFO)
+                passed += 1
             else:
                 output(msgs.get_msg(e, lang, validator.__name__), Codes.ERROR)
                 failed += 1
     
-    if not failed:
+    if passed == len(validators):
         output(msgs.get_msg("CorrectResult", lang), Codes.CORRECT)
         
     return grader(failed)

@@ -90,7 +90,9 @@ def replace_module(st_module, module_name, object):
     for match in import_as_pat.finditer(inspect.getsource(st_module)):
         if match.group("module") == module_name:
             module_name = match.group("alias")
+    original = getattr(st_module, module_name)
     setattr(st_module, module_name, object)
+    return original
 
 def determine_question(history, completed, active, target):
     '''
