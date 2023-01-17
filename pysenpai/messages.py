@@ -117,14 +117,14 @@ class TranslationDict(dict):
                     self.__setitem__(key, value)
 
 
-def load_messages(lang, category, module="core"):
+def load_messages(lang, category, module="pysenpai"):
     msgs = TranslationDict()
-    msg_path = pkg_resources.resource_filename(__name__, "msg_data")
+    msg_path = pkg_resources.resource_filename(module, "msg_data")
     try:
-        with open(os.path.join(msg_path, lang, f"{module}.yml"), encoding="utf-8") as msg_file:
+        with open(os.path.join(msg_path, lang, "messages.yml"), encoding="utf-8") as msg_file:
             msg_dict = yaml.safe_load(msg_file)
     except FileNotFoundError:
-        sys.exit(f"ERROR: Message file {module} not found for language {lang}")
+        sys.exit(f"ERROR: Messages for module {module} not found for language {lang}")
     
     for key, value in msg_dict[category].items():
         msgs.set_msg(key, lang, dict(content=value))
