@@ -53,6 +53,9 @@ function:
   PrintTestVector: |-
     Function call used:
     {call}
+  PrintTestData: |-
+    Data used in the test:
+    {data}
   RepeatingResult: |-
     The function produced the same result twice in succession. This usually means the function is not reacting properly to arguments or inputs.
     This is especially likely if this message pops up repeatedly.
@@ -185,6 +188,9 @@ program:
   PrintInputVector: |-
     Using inputs:
     {inputs}
+  PrintTestData: |-
+    Data used in the test:
+    {data}
   PrintReference: |-
     Expected to find these values:
     {ref}
@@ -243,6 +249,9 @@ snippet:
   PrintInputVector: |-
     While using inputs:
     {inputs}
+  PrintTestData: |-
+    Data used in the test:
+    {data}
   PrintReference: |-
     Expected variables:
     {ref}

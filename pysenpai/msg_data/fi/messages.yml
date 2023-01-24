@@ -40,6 +40,9 @@ function:
   PrintInputVector: |- 
     Kokeiltiin syötteillä:
     {inputs}
+  PrintTestData: |-
+    Testidata:
+    {data}
   PrintReference: |- 
     Olisi pitänyt palauttaa: {ref}
   PrintStudentOutput: |-
@@ -177,7 +180,10 @@ program:
   PrintInputVector: |- 
     Käytettiin syötteitä:
     {inputs}
-  PrintReference: |- 
+  PrintTestData: |-
+    Testidata:
+    {data}
+  PrintReference: |-
     Arvot joiden olisi pitänyt löytyä:
     {ref}
   PrintStudentOutput: |-
@@ -232,6 +238,9 @@ snippet:
   PrintInputVector: |- 
     Käytettiin syötteitä:
     {inputs}
+  PrintTestData: |-
+    Testidata:
+    {data}
   PrintReference: |-
     Odotetut muuttujien arvot:
     {ref}

@@ -17,6 +17,7 @@ class TestCase(object):
     def __init__(self, ref_result, 
                  args=None,
                  inputs=None,
+                 data=None,
                  weight=1,
                  tag="",
                  validator=defaults.result_validator,
@@ -27,6 +28,7 @@ class TestCase(object):
                  
         self.args = args or []
         self.inputs = inputs or []
+        self.data = data
         self.weight = weight
         self.tag = tag
         self.ref_result = ref_result
@@ -39,6 +41,7 @@ class TestCase(object):
         self.presenters = {
             "arg": defaults.default_value_presenter,
             "input": defaults.default_input_presenter,
+            "data": defaults.default_value_presenter,
             "ref": defaults.default_value_presenter,
             "res": defaults.default_value_presenter,
             "parsed": defaults.default_value_presenter,
@@ -99,6 +102,7 @@ class ProgramTestCase(TestCase):
     def __init__(self, ref_result, 
                  args=None,
                  inputs=None,
+                 data=None,
                  weight=1,
                  tag="",
                  validator=convenience.parsed_result_validator,
@@ -108,7 +112,7 @@ class ProgramTestCase(TestCase):
                  presenters=None):
         
         super().__init__(
-            ref_result, args, inputs, weight, tag, validator, output_validator, eref_results, internal_config, presenters
+            ref_result, args, inputs, data, weight, tag, validator, output_validator, eref_results, internal_config, presenters
         )
 
     def wrap(self, module, target):
@@ -124,6 +128,7 @@ class SnippetTestCase(TestCase):
 
 def run_test_cases(category, test_target, st_module, test_cases, lang, 
                   parent_object=None,
+                  msg_module="pysenpai",
                   custom_msgs={},
                   hide_output=True,
                   test_recurrence=True,
@@ -136,7 +141,7 @@ def run_test_cases(category, test_target, st_module, test_cases, lang,
 
     # One time preparations
     save = sys.stdout
-    msgs = load_messages(lang, category)
+    msgs = load_messages(lang, category, module=msg_module)
     msgs.update(custom_msgs)
     
     # call test and input producing functions 
@@ -167,14 +172,22 @@ def run_test_cases(category, test_target, st_module, test_cases, lang,
             inps = []
 
         if test.args:
-            output(msgs.get_msg("PrintTestVector", lang), Codes.DEBUG,
+            output(
+                msgs.get_msg("PrintTestVector", lang), Codes.DEBUG,
                 args=test.present_object("arg", test.args),
                 call=test.present_call(test_target)
             )
         if test.inputs:
-            output(msgs.get_msg("PrintInputVector", lang), Codes.DEBUG,
+            output(
+                msgs.get_msg("PrintInputVector", lang), Codes.DEBUG,
                 inputs=test.present_object("input", test.inputs)
             )
+        if test.data:
+            output(
+                msgs.get_msg("PrintTestData", lang), Codes.DEBUG,
+                data=test.present_object("data", test.data)
+            )
+
 
         # Test preparations
         sys.stdout = o
