@@ -126,6 +126,8 @@ def load_messages(lang, category, module="pysenpai"):
     except FileNotFoundError:
         sys.exit(f"ERROR: Messages for module {module} not found for language {lang}")
     
+    for key, value in msg_dict.get("common", {}).items():
+        msgs.set_msg(key, lang, dict(content=value))
     for key, value in msg_dict[category].items():
         msgs.set_msg(key, lang, dict(content=value))
     return msgs

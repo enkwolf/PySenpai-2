@@ -1,8 +1,29 @@
-function:
+common:
   AdditionalInfo: |-
     The checker gave the following as additional information:
   AdditionalTests: |-
     Performing additional tests that may suggest cause for the error...
+  MessageInfo: ""
+  OutputPatternInfo: ""
+  PrintExcLine: |-
+    Caused by line {lineno}:
+    {{{{{{{line}}}}}}}
+  PrintInputVector: |-
+    Using inputs:
+    {inputs}
+  PrintStudentModule: |-
+    Source code of the executed program:
+    {{{{{{highlight=python3
+    {module}
+    }}}}}}
+  PrintTestData: |-
+    Data used in the test:
+    {data}
+  SystemExit: |-
+    The program was terminated through the use of:
+    quit(), exit(), sys.exit(), raise SystemExit (etc.)
+    Your program needs to be implemented such a way that it doesn't need any of these.
+function:
   AttributeError: |-
     The function was not found, or another kind of AttributeError occurred while calling the function.
     Additional information:
@@ -37,12 +58,6 @@ function:
     Check that your function uses the specified formatting when printing.
     Reason provided by the checker:{reason}
   OutputPatternInfo: ""
-  PrintExcLine: |-
-    Caused by line {lineno}:
-    {{{{{{{line}}}}}}}
-  PrintInputVector: |-
-    Using inputs:
-    {inputs}
   PrintReference: |-
     Expected result: {ref}
   PrintStudentOutput: |-
@@ -53,16 +68,9 @@ function:
   PrintTestVector: |-
     Function call used:
     {call}
-  PrintTestData: |-
-    Data used in the test:
-    {data}
   RepeatingResult: |-
     The function produced the same result twice in succession. This usually means the function is not reacting properly to arguments or inputs.
     This is especially likely if this message pops up repeatedly.
-  SystemExit: |-
-    The program was terminated through the use of:
-    quit(), exit(), sys.exit(), raise SystemExit (etc.)
-    Your program needs to be implemented such a way that it doesn't need any of these.
   TypeError: |-
     The function expects an incorrect number of arguments. Alternatively another kind of TypeError occurred while calling the function.
     Additional information:
@@ -97,12 +105,6 @@ import:
     The program has an execution path where it tries to access an undefined variable.
     Additional information:
     {emsg}"
-  PrintExcLine: |-
-    Caused by line {lineno}:
-    {{{{{{{line}}}}}}}
-  PrintInputVector: |-
-    While using inputs:
-    {inputs}
   PrintStudentOutput: |-
     Your program's output while loading:
     {output}
@@ -110,10 +112,6 @@ import:
     Your code included syntax errors. Do not use the checking program as a Python interpreter!
     You should find all the errors in your code by running it in a shell as it provides more accurate information of what went wrong.
     Submit your code for testing only after it runs on your computer!
-  SystemExit: |-
-    The program was terminated through the use of:
-    quit(), exit(), sys.exit(), raise SystemExit (etc.)
-    Your program needs to be implemented such a way that it doesn't need any of these.
   SystemModuleName: |-
     The filename {name} collides with a system module. Rename your file.
 lint:
@@ -151,10 +149,6 @@ lint:
     Your code received too low quality score ({stats.global_note:.1f} / 10.0).
     Target: 9+ / 10.0.
 program:
-  AdditionalInfo: |-
-    The checker gave the following as additional information:
-  AdditionalTests: |-
-    Performing additional tests that may suggest cause for the error...
   CorrectMessage: |-
     The program's output was correct.
   CorrectResult: |-
@@ -176,21 +170,10 @@ program:
     An IndexError occurred while running the program. This can be caused by improper handling of split inputs, i.e. failing to check that the input contained enough parameters using the correct separator.
     Additional information:
     {emsg}
-  MessageInfo: ""
   OutputParseError: |-
     Parsing the program's output for result values was not successful.
     Check that your program uses the specified formatting when printing.
     Reason provided by the checker:{reason}
-  OutputPatternInfo: ""
-  PrintExcLine: |-
-    Caused by line {lineno}:
-    {{{{{{{line}}}}}}}
-  PrintInputVector: |-
-    Using inputs:
-    {inputs}
-  PrintTestData: |-
-    Data used in the test:
-    {data}
   PrintReference: |-
     Expected to find these values:
     {ref}
@@ -205,10 +188,54 @@ program:
   RepeatingResult: |-
     The program produced the same result twice in succession. This usually means the program is not reacting properly to inputs.
     This is especially likely if this message pops up repeatedly.
-  SystemExit: |-
-    The program was terminated through the use of:
-    quit(), exit(), sys.exit(), raise SystemExit (etc.)
-    Your program needs to be implemented such a way that it doesn't need any of these.
+  TargetName: |-
+    Testing program...
+  TypeError: |-
+    A TypeError occurred while running the program. This can be the result of not converting user inputs into proper types (inputs are always strings).
+    Additional information:
+    {emsg}
+  ValueError: |-
+    A ValueError occurred while running the program. This is likely caused by faulty handling of erroneous inputs.
+    Additional information:
+    {emsg}
+object:
+  CorrectMessage: |-
+    The program's output was correct.
+  CorrectResult: |-
+    The program performed correctly.
+  EOFError: |-
+    The program prompted for more inputs than were provided by the tester. This is likely caused by faulty end condition handling.
+    Additional information:
+    {emsg}
+  GenericErrorMsg: |-
+    An error occurred while running the program.
+    Additional information:
+    {ename}: {emsg}
+    Test the program on your computer to get more information.
+  IncorrectMessage: |-
+    The program's output was incorrect.
+  IncorrectResult: |-
+    The final state contained incorrect values.
+  IndexError: |-
+    An IndexError occurred while running the program. This can be caused by improper handling of split inputs, i.e. failing to check that the input contained enough parameters using the correct separator.
+    Additional information:
+    {emsg}
+  OutputParseError: |-
+    Parsing the program's output for result values was not successful.
+    Check that your program uses the specified formatting when printing.
+    Reason provided by the checker:{reason}
+  PrintReference: |-
+    Expected to find these names and values:
+    {ref}
+  PrintStudentOutput: |-
+    Your program's output:
+    {output}
+  PrintStudentResult: |-
+    The final state:
+    {res}
+  RepeatingResult: |-
+    The program produced the same result twice in succession. This usually means the program is not reacting properly to inputs.
+    This is especially likely if this message pops up repeatedly.
   TargetName: |-
     Testing program...
   TypeError: |-
@@ -220,10 +247,6 @@ program:
     Additional information:
     {emsg}
 snippet:
-  AdditionalInfo: |-
-    The checker gave the following as additional information:
-  AdditionalTests: |-
-    Performing additional tests that may suggest cause for the error...
   CorrectMessage: |-
     The code's output was correct.
   CorrectResult: |-
@@ -237,21 +260,13 @@ snippet:
     The code's output was incorrect.
   IncorrectResult: |-
     The code performed incorrectly.
-  MessageInfo: ""
   OutputParseError: |-
     Parsing the program's output for result values was not successful.
     Check that your program uses the specified formatting when printing.
     Reason provided by the checker: {reason}
-  OutputPatternInfo: ""
   PrintConstructedCode: |-
     Your answer inserted into a complete program:
     {code}
-  PrintInputVector: |-
-    While using inputs:
-    {inputs}
-  PrintTestData: |-
-    Data used in the test:
-    {data}
   PrintReference: |-
     Expected variables:
     {ref}

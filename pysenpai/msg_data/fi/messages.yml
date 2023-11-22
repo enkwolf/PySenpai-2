@@ -1,8 +1,29 @@
-function:
+common:
   AdditionalInfo: |-
     Tarkistin antoi myös seuraavat lisätiedot:
   AdditionalTests: |-
     Suoritetaan lisätestejä, jotka saattavat kertoa mistä virhe johtuu...
+  MessageInfo: ""
+  OutputPatternInfo: ""
+  PrintExcLine: |-
+    Aiheutui rivistä {lineno}:
+    {{{{{{{line}}}}}}}
+  PrintInputVector: |-
+    Kokeiltiin syötteillä:
+    {inputs}
+  PrintStudentModule: |-
+    Suoritettavan ohjelman lähdekoodi:
+    {{{{{{highlight=python3
+    {module}
+    }}}}}}
+  PrintTestData: |-
+    Testidata:
+    {data}
+  SystemExit: |-
+    Koodin suoritus on lopetettu väärin käyttämällä jotain seuraavista:
+    quit(), exit(), sys.exit(), raise SystemExit
+    Toteuta ohjelma siten, että näille tai vastaaville keinoille ei ole tarvetta!"
+function:
   AttributeError: |-
     Oikean nimistä funktiota ei löytynyt, tai sitä kutsuttaessa tapahtui jokin muu AttributeError.
     Lisätietoja:\n{emsg}
@@ -28,21 +49,10 @@ function:
   IsNotFunction: |- 
     Objekti nimeltä {name} löytyi, mutta se ei ollut funktio.
     Varmista, että olet käyttänyt oikeaa funktion nimeä, ja että funktion päälle ei pääohjelmassa kirjoiteta jotain muuta samalla nimellä.
-  MessageInfo: ""
   OutputParseError: |- 
     Funktion tulosteesta ei löytynyt kaikkia arvoja.
     Varmista että käytät tehtävänannossa määriteltyä muotoilua tulosteille.
     Epäonnistumisen syy: {reason}
-  OutputPatternInfo: ""
-  PrintExcLine: |-
-    Aiheutui rivistä {lineno}:
-    {{{{{{{line}}}}}}}
-  PrintInputVector: |- 
-    Kokeiltiin syötteillä:
-    {inputs}
-  PrintTestData: |-
-    Testidata:
-    {data}
   PrintReference: |- 
     Olisi pitänyt palauttaa: {ref}
   PrintStudentOutput: |-
@@ -56,11 +66,55 @@ function:
   RepeatingResult: |- 
     Funktio tuotti kahdesti peräkkäin saman tuloksen. Tämä yleensä tarkoittaa, että funktio ei reagoi odotetulla tavalla sille annettuihin argumentteihin tai syötteisiin.
     Tämä pätee erityisesti jos tämä viesti toistuu.
-  SystemExit: |- 
-    Koodin suoritus on lopetettu väärin käyttämällä jotain seuraavista:
-    quit(), exit(), sys.exit(), raise SystemExit
-    Toteuta ohjelma siten, että näille tai vastaaville keinoille ei ole tarvetta!"
-  TypeError: | 
+  TypeError: |-
+    Funktiolle on määritelty väärä määrä parametreja, tai sitä kutsuttaessa tapahtui jokin muu TypeError.
+    Tarkista tehtävänannosta millaset parametrit funktiolla tulisi olla
+    Lisätietoja:
+    {emsg}
+output_function:
+  AttributeError: |-
+    Oikean nimistä funktiota ei löytynyt, tai sitä kutsuttaessa tapahtui jokin muu AttributeError.
+    Lisätietoja:\n{emsg}
+  CorrectMessage: |-
+    Funktion tulosteet olivat oikein.
+  CorrectResult: |-
+    Funktion tulosteesta löytyi oikeat arvot.
+  EOFError: |-
+    Funktio pyysi enemmän syötteitä kuin testausohjelma antoi. Tämä voi johtua väärin käsitellystä funktion lopetusehdosta.
+    Lisätietoja:
+    {emsg}
+  TargetName: |-
+    Testataan {name}-funktiota...
+  GenericErrorMsg: |-
+    Funktiota kutsuttaessa tapahtui poikkeus.
+    Lisätietoja:
+    {ename}: {emsg}.
+    Testaa funktiota omalla koneellasi saadaksesi lisätietoja.
+  IncorrectMessage: |-
+    Funktion tuloste oli virheellinen.
+  IncorrectResult: |-
+    Funktion tulosteesta löytyi vääriä arvoja.
+  IsNotFunction: |-
+    Objekti nimeltä {name} löytyi, mutta se ei ollut funktio.
+    Varmista, että olet käyttänyt oikeaa funktion nimeä, ja että funktion päälle ei pääohjelmassa kirjoiteta jotain muuta samalla nimellä.
+  OutputParseError: |-
+    Funktion tulosteesta ei löytynyt kaikkia arvoja.
+    Varmista että käytät tehtävänannossa määriteltyä muotoilua tulosteille.
+    Epäonnistumisen syy: {reason}
+  PrintReference: |-
+    Olisi pitänyt löytyä: {ref}
+  PrintStudentOutput: |-
+    Funktiosi koko tuloste:
+    {output}
+  PrintStudentResult: |-
+    Funktion tulosteesta löytyneet arvot: {parsed}
+  PrintTestVector: |-
+    Käytetty funktiokutsu:
+    {call}
+  RepeatingResult: |-
+    Funktio tuotti kahdesti peräkkäin saman tuloksen. Tämä yleensä tarkoittaa, että funktio ei reagoi odotetulla tavalla sille annettuihin argumentteihin tai syötteisiin.
+    Tämä pätee erityisesti jos tämä viesti toistuu.
+  TypeError: |-
     Funktiolle on määritelty väärä määrä parametreja, tai sitä kutsuttaessa tapahtui jokin muu TypeError.
     Tarkista tehtävänannosta millaset parametrit funktiolla tulisi olla
     Lisätietoja:
@@ -144,10 +198,6 @@ lint:
     Koodisi sai liian pienet laatupisteet ({stats.global_note:.1f} / 10.0).
     Tavoite: 9+ / 10.0.
 program:
-  AdditionalInfo: |- 
-    Tarkistin antoi myös seuraavat lisätiedot:
-  AdditionalTests: |- 
-    Suoritetaan lisätestejä, jotka saattavat kertoa mistä virhe johtuu...
   CorrectMessage: |-
     Ohjelman tulosteet olivat oikein.
   CorrectResult: |-
@@ -168,21 +218,11 @@ program:
     Ohjelmaa suorittaessa tapahtui IndexError. Tämä voi johtua siitä, että ohjelma ei käsittele oikein moniosaisia syötteitä, joista puuttuu osia, tai joissa on väärä erotin.
     Lisätietoja:
     {emsg}
-  MessageInfo: ""
   OutputParseError: |-
     Ohjelman tulosteesta ei löytynyt kaikkia arvoja.
     Varmista että käytät tehtävänannossa määriteltyä muotoilua tulosteille.
     Epäonnistumisen syy: {reason}
   OutputPatternInfo: ""
-  PrintExcLine: |-
-    Aiheutui rivistä {lineno}:
-    {{{{{{{line}}}}}}}
-  PrintInputVector: |- 
-    Käytettiin syötteitä:
-    {inputs}
-  PrintTestData: |-
-    Testidata:
-    {data}
   PrintReference: |-
     Arvot joiden olisi pitänyt löytyä:
     {ref}
@@ -197,15 +237,57 @@ program:
   RepeatingResult: |- 
     Ohjelma tuotti kahdesti peräkkäin saman tuloksen. Tämä yleensä tarkoittaa, että ohjelma ei reagoi odotetulla tavalla sille annettuihin syötteisiin.
     Tämä pätee erityisesti jos tämä viesti toistuu.
-  SystemExit: |- 
-    Koodin suoritus on lopetettu väärin käyttämällä jotain seuraavista:
-    quit(), exit(), sys.exit(), raise SystemExit
-    Toteuta ohjelma siten, että näille tai vastaaville keinoille ei ole tarvetta!
   TypeError: |- 
     Ohjelmaa suorittaessa tapahtui TypeError. Tämä voi johtua siitä, että syötteitä ei muuteta ennen käyttöä (syötteet ovat aina merkkijonoja).
     Lisätietoja:
     {emsg}
   ValueError: |- 
+    Ohjelmaa suorittaessa tapahtui ValueError. Tämä voi johtua siitä, että virheellisiä syötteitä ei ole käsitelty oikein.Lisätietoja:
+    {emsg}
+object:
+  CorrectMessage: |-
+    Ohjelman tulosteet olivat oikein.
+  CorrectResult: |-
+    Ohjelma toimi oikein.
+  EOFError: |-
+    Ohjelma pyysi enemmän syötteitä kuin testausohjelma antoi. Tämä voi johtua väärin käsitellystä ohjelman lopetusehdosta. Lisätietoja:
+    {emsg}
+  GenericErrorMsg: |-
+    Ohjelmaa suorittaessa tapahtui poikkeus.
+    Lisätietoja:
+    {ename}: {emsg}
+    Testaa ohjelmaa omalla koneellasi saadaksesi lisätietoja.
+  IncorrectMessage: |-
+    Ohjelman tuloste oli virheellinen.
+  IncorrectResult: |-
+    Lopputila sisälsi virheellisiä nimiä tai arvoja
+  IndexError: |-
+    Ohjelmaa suorittaessa tapahtui IndexError. Tämä voi johtua siitä, että ohjelma ei käsittele oikein moniosaisia syötteitä, joista puuttuu osia, tai joissa on väärä erotin.
+    Lisätietoja:
+    {emsg}
+  OutputParseError: |-
+    Ohjelman tulosteesta ei löytynyt kaikkia arvoja.
+    Varmista että käytät tehtävänannossa määriteltyä muotoilua tulosteille.
+    Epäonnistumisen syy: {reason}
+  PrintReference: |-
+    Nimet ja arvot joiden olisi pitänyt löytyä:
+    {ref}
+  PrintStudentOutput: |-
+    Ohjelmasi koko tuloste:
+    {output}
+  PrintStudentResult: |-
+    Lopputilan sisältämät nimet ja arvot:
+    {res}
+  TargetName: |-
+    Testataan ohjelmaa...
+  RepeatingResult: |-
+    Ohjelma tuotti kahdesti peräkkäin saman tuloksen. Tämä yleensä tarkoittaa, että ohjelma ei reagoi odotetulla tavalla sille annettuihin syötteisiin.
+    Tämä pätee erityisesti jos tämä viesti toistuu.
+  TypeError: |-
+    Ohjelmaa suorittaessa tapahtui TypeError. Tämä voi johtua siitä, että syötteitä ei muuteta ennen käyttöä (syötteet ovat aina merkkijonoja).
+    Lisätietoja:
+    {emsg}
+  ValueError: |-
     Ohjelmaa suorittaessa tapahtui ValueError. Tämä voi johtua siitä, että virheellisiä syötteitä ei ole käsitelty oikein.Lisätietoja:
     {emsg}
 snippet:
@@ -255,6 +337,21 @@ snippet:
     Koodissa ei luotu pyydettyä muuttujaa.
   fail_variable_value: |- 
     Koodi sijoitti muuttujaan väärän arvon.
+value:
+  CorrectResult: |-
+    Vastaus oli oikein.
+  IncorrectResult: |-
+    Vastaus oli väärin.
+  GenericErrorMsg: |-
+    Vastausta lukiessa tapahtui poikkeus.
+    Lisätietoja:
+    {ename}: {emsg}
+  PrintReference: |-
+    Oikea vastaus: {ref}
+  PrintStudentResult: |-
+    Tarkistettu vastaus: {res}
+  TargetName: |-
+    Tarkistetaan annettua vastausta.
 static:
   AttributeError: |- 
     {fname}-nimistä funktiota ei löytynyt kooditiedostosta.

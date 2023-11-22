@@ -46,7 +46,7 @@ class JsonOutput(dict):
             "title": title,
             "runs": []
         })
-        
+
     def new_run(self):
         """
         This is called when a new test case begins. There is no title, it 

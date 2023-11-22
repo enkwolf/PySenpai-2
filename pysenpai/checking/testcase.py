@@ -119,23 +119,17 @@ class ProgramTestCase(TestCase):
         importlib.reload(module)
 
 
-class SnippetTestCase(TestCase):
-
-    def wrap(self, module, target):
-        pass
-
-
 
 def run_test_cases(category, test_target, st_module, test_cases, lang, 
-                  parent_object=None,
-                  msg_module="pysenpai",
-                  custom_msgs={},
-                  hide_output=True,
-                  test_recurrence=True,
-                  validate_exception=False,
-                  argument_cloner=defaults.default_argument_cloner,
-                  new_test=defaults.default_new_test,
-                  grader=defaults.pass_fail_grader): 
+                   parent_object=None,
+                   msg_module="pysenpai",
+                   custom_msgs={},
+                   hide_output=True,
+                   show_module=False,
+                   test_recurrence=True,
+                   validate_exception=False,
+                   new_test=defaults.default_new_test,
+                   grader=defaults.pass_fail_grader):
 
 
 
@@ -153,7 +147,6 @@ def run_test_cases(category, test_target, st_module, test_cases, lang,
     json_output.new_test(
         msgs.get_msg("TargetName", lang)["content"].format(name=test_target)
     )
-    
     if parent_object is None:
         parent_object = st_module
 
@@ -164,6 +157,12 @@ def run_test_cases(category, test_target, st_module, test_cases, lang,
 
     for i, test in enumerate(test_cases):
         json_output.new_run()
+
+        if show_module:
+            output(
+                msgs.get_msg("PrintStudentModule", lang), Codes.DEBUG,
+                module=inspect.getsource(st_module)
+            )
 
         try:
             inps = test.inputs
@@ -200,7 +199,7 @@ def run_test_cases(category, test_target, st_module, test_cases, lang,
             sys.stdout = save
             output(msgs.get_msg("IsNotFunction", lang), Codes.ERROR, name=e.callable_name)
             return 0
-        except Exception as e:
+        except BaseException as e:
             if validate_exception:
                 res = e
             else:
@@ -218,7 +217,7 @@ def run_test_cases(category, test_target, st_module, test_cases, lang,
                 )
                 test.teardown()
                 continue
-            
+
         # Validating function results
         sys.stdout = save
         if not hide_output:

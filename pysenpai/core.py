@@ -4,6 +4,7 @@ import importlib
 import io
 import json
 import os.path
+import re
 import sys
 import pysenpai.callbacks.defaults as defaults
 from pysenpai.output import json_output
@@ -128,6 +129,7 @@ def load_module(module_path,
                 inputs=[], 
                 hide_output=True, 
                 allow_output=True, 
+                skip_name_check=False,
                 presenter=defaults.default_input_presenter):
     """
     load_module(module_path[, lang="en"][, custom_msgs={}][, inputs=[]][, hide_output=True][, allow_output=True][, presenter=default_input_presenter]) -> Module
@@ -192,7 +194,20 @@ def load_module(module_path,
         
     o = StringOutput()
     sys.stdout = o
-    
+
+    # Skip the if __name__ == "__main__": check by replacing the line with if True:
+    # This solution seems very janky but there probably isn't a better one
+    if skip_name_check:
+        with open(module_path, encoding="utf-8") as source:
+            name_check_re = re.compile(r"""if *__name__ *== *["']__main__["']: *\n""")
+            lines = source.readlines()
+            for i, line in enumerate(lines):
+                if name_check_re.match(line):
+                    lines[i] = "if True:\n"
+        with open(module_path, "w", encoding="utf-8") as target:
+            for line in lines:
+                target.write(line)
+
     try:        
         st_module = importlib.import_module(name)
     except:
