@@ -52,7 +52,7 @@ def pylint_test(st_module,
     sys.stderr = e
     
     try:
-        result = lint.Run(options_list, do_exit=False)
+        result = lint.Run(options_list, exit=False)
     except:
         etype, evalue, etrace = sys.exc_info()
         sys.stdout = save_o
