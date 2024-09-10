@@ -280,6 +280,21 @@ snippet:
     Testing code snippet...
   TargetName: |-
     Testing code snippet...
+value:
+  CorrectResult: |-
+    The answer was correct.
+  IncorrectResult: |-
+    The answer was not correct.
+  GenericErrorMsg: |-
+    An error occurred while running the program.
+    Additional information:
+    {ename}: {emsg}
+  PrintReference: |-
+    Correct answer: {ref}
+  PrintStudentResult: |-
+    Submitted answer: {res}
+  TargetName: |-
+    Checking submitted answer.
 static:
   AttributeError: |-
     A function called {fname} was not found from your code file.
