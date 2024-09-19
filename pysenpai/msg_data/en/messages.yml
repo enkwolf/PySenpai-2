@@ -75,6 +75,54 @@ function:
     The function expects an incorrect number of arguments. Alternatively another kind of TypeError occurred while calling the function.
     Additional information:
     {emsg}
+output_function:
+  AttributeError: |-
+    The function was not found, or another kind of AttributeError occurred while calling the function.
+    Additional information:
+    {emsg}
+  CorrectMessage: |-
+    The function's output was correct.
+  CorrectResult: |-
+    Values found from the function's output were correct.
+  EOFError: |-
+    An EOFError occurred while calling the function. The most likely cause is calling input too many times.
+    Additional information:
+    {emsg}
+  TargetName: |-
+    Testing function {name}...
+  GenericErrorMsg: |-
+    An error occurred while calling the function.
+    Additional information:
+    {ename}: {emsg}
+    Test the function on your computer to get more information.
+  IncorrectMessage: |-
+    The function's output was incorrect.
+  IncorrectResult: |-
+    Values found from the function's output were not correct.
+  IsNotFunction: |-
+    An object called {name} was found, but it was not a function.
+    Take care to not overwrite the function with another value in your main program!
+  OutputParseError: |-
+    Parsing the function's output for result values was not successful.
+    Check that your function uses the specified formatting when printing.
+    Reason provided by the checker:{reason}
+  PrintReference: |-
+    Values that should have been found: {ref}
+  PrintStudentOutput: |-
+    Your function's output:
+    {output}
+  PrintStudentResult: |-
+    Values found from your function's output: {parsed}
+  PrintTestVector: |-
+    Function call used:
+    {call}
+  RepeatingResult: |-
+    The function produced the same result twice in succession. This usually means the function is not reacting properly to arguments or inputs.
+    This is especially likely if this message pops up repeatedly.
+  TypeError: |-
+    The function expects an incorrect number of arguments. Alternatively another kind of TypeError occurred while calling the function.
+    Additional information:
+    {emsg}
 import:
   BadModuleName: |-
     The filename contained unsupported characters.
