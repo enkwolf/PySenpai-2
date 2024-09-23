@@ -6,3 +6,6 @@ dependencies = [
     "pyyaml",
     "setuptools",
 ]
+
+[project.scripts]
+pysen-cliout = "pysenpai.scripts.cliout:main"
