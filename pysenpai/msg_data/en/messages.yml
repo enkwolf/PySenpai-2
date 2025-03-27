@@ -231,6 +231,9 @@ program:
   PrintStudentResult: |-
     The following values were parsed from your program's output:
     {parsed}
+  PrintTestVector: |-
+    Command line arguments used:
+    {args}
   ProgramName: |-
     Testing program...
   RepeatingResult: |-

@@ -232,6 +232,9 @@ program:
   PrintStudentResult: |-
     Ohjelman tulosteesta löytyneet arvot:
     {parsed}
+  PrintTestVector: |-
+    Käytetyt komentoriviargumentit:
+    {args}
   TargetName: |-
     Testataan ohjelmaa...
   RepeatingResult: |- 
