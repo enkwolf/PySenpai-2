@@ -204,7 +204,8 @@ def load_module(module_path,
             for i, line in enumerate(lines):
                 if name_check_re.match(line):
                     lines[i] = "if True:\n"
-        with open(module_path, "w", encoding="utf-8") as target:
+        name += "_"
+        with open(f"{name}.py", "w", encoding="utf-8") as target:
             for line in lines:
                 target.write(line)
 
